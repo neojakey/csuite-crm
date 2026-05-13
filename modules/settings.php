@@ -108,7 +108,59 @@ require __DIR__ . '/../partials/nav.php';
         </form>
     </div>
 
-    <!-- API test -->
+    <!-- API Keys -->
+    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
+        <h2 class="text-sm font-semibold text-slate-300 mb-1">API Keys</h2>
+        <p class="text-xs text-slate-500 mb-4">Keys are stored in the database. Leave blank to use the value from <code>.env</code> (Anthropic only).</p>
+        <div class="space-y-4">
+            <div>
+                <div class="flex justify-between items-end mb-1">
+                    <label class="block text-xs text-slate-400">Anthropic API Key</label>
+                    <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                </div>
+                <div class="flex gap-2">
+                    <input type="password" id="anthropic-key-input"
+                           value="<?= htmlspecialchars( $settings['anthropic_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
+                           placeholder="sk-ant-api03-…"
+                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
+                    <button id="test-anthropic-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                </div>
+                <div id="test-anthropic-result" class="hidden text-sm mt-2"></div>
+            </div>
+            <div>
+                <div class="flex justify-between items-end mb-1">
+                    <label class="block text-xs text-slate-400">Gemini API Key</label>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                </div>
+                <div class="flex gap-2">
+                    <input type="password" id="gemini-key-input"
+                           value="<?= htmlspecialchars( $settings['gemini_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
+                           placeholder="AIza…"
+                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
+                    <button id="test-gemini-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                </div>
+                <div id="test-gemini-result" class="hidden text-sm mt-2"></div>
+            </div>
+            <div>
+                <div class="flex justify-between items-end mb-1">
+                    <label class="block text-xs text-slate-400">Perplexity API Key</label>
+                    <a href="https://www.perplexity.ai/settings/api" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                </div>
+                <div class="flex gap-2">
+                    <input type="password" id="perplexity-key-input"
+                           value="<?= htmlspecialchars( $settings['perplexity_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
+                           placeholder="pplx-…"
+                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
+                    <button id="test-perplexity-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                </div>
+                <div id="test-perplexity-result" class="hidden text-sm mt-2"></div>
+            </div>
+        </div>
+        <button id="save-api-keys-btn" class="mt-4 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-medium px-4 py-2 rounded-md text-sm"><?= __( 'ui.save' ) ?></button>
+        <span id="save-api-keys-result" class="hidden text-sm ml-3 self-center"></span>
+    </div>
+
+    <!-- API test (legacy) -->
     <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
         <h2 class="text-sm font-semibold text-slate-300 mb-4"><?= __( 'settings.api_test' ) ?></h2>
         <div class="flex items-center gap-3">
@@ -166,6 +218,57 @@ require __DIR__ . '/../partials/nav.php';
 </main>
 
 <script>
+// ── API key save ─────────────────────────────────────────────────────────────
+document.getElementById('save-api-keys-btn').addEventListener('click', async function () {
+    var btn    = this;
+    var result = document.getElementById('save-api-keys-result');
+    btn.disabled = true;
+    result.className = 'hidden text-sm ml-3 self-center';
+
+    var res  = await fetch((window.CSUITE?.baseUrl || '/') + 'api/settings.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+            action:               'save_api_keys',
+            anthropic_api_key:    document.getElementById('anthropic-key-input').value,
+            gemini_api_key:       document.getElementById('gemini-key-input').value,
+            perplexity_api_key:   document.getElementById('perplexity-key-input').value,
+        }),
+    });
+    var data = await res.json();
+    result.textContent = data.success ? 'Saved.' : 'Error saving.';
+    result.className   = 'text-sm ml-3 self-center ' + (data.success ? 'text-green-400' : 'text-red-400');
+    btn.disabled = false;
+});
+
+// ── API key test helpers ──────────────────────────────────────────────────────
+async function testApiKey(action, resultId, btn) {
+    btn.disabled = true;
+    var span     = document.getElementById(resultId);
+    span.className = 'hidden text-sm mt-2';
+
+    var res  = await fetch((window.CSUITE?.baseUrl || '/') + 'api/settings.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action }),
+    });
+    var data = await res.json();
+    var errText = data.error ? ' (' + data.error + ')' : '';
+    span.textContent = data.success ? '✓ Connected' : '✗ Failed' + errText;
+    span.className   = 'text-sm mt-2 ' + (data.success ? 'text-green-400' : 'text-red-400');
+    btn.disabled = false;
+}
+
+document.getElementById('test-anthropic-btn').addEventListener('click', function () {
+    testApiKey('test_anthropic', 'test-anthropic-result', this);
+});
+document.getElementById('test-gemini-btn').addEventListener('click', function () {
+    testApiKey('test_gemini', 'test-gemini-result', this);
+});
+document.getElementById('test-perplexity-btn').addEventListener('click', function () {
+    testApiKey('test_perplexity', 'test-perplexity-result', this);
+});
+
 document.getElementById('api-test-btn').addEventListener('click', async function () {
     const btn    = this;
     const result = document.getElementById('api-test-result');

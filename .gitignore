@@ -24,3 +24,14 @@ tailwindcss.exe
 
 # Claude Code project settings
 .claude/
+
+# Other AI Agents / IDEs
+.augment/
+.clinerules/
+.cursor/
+.kiro/
+.roo/
+.windsurf/
+
+# Temporary files
+*.tmp

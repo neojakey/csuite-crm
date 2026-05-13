@@ -14,12 +14,13 @@ class AgentSession {
         string $mode,
         string $prompt,
         string $output,
-        ?int $contact_id = null
+        ?int $contact_id = null,
+        string $provider = 'claude'
     ): int {
         $stmt = self::db()->prepare(
-            'INSERT INTO agent_sessions (agent_role, mode, user_prompt, agent_output, contact_id) VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO agent_sessions (agent_role, mode, provider, user_prompt, agent_output, contact_id) VALUES (?, ?, ?, ?, ?, ?)'
         );
-        $stmt->execute( [ $role, $mode, $prompt, $output, $contact_id ] );
+        $stmt->execute( [ $role, $mode, $provider, $prompt, $output, $contact_id ] );
         return (int) self::db()->lastInsertId();
     }
 

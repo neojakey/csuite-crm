@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS agent_sessions (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     agent_role ENUM('CEO','CTO','CFO','CMO','CPO','COO') NOT NULL,
     mode VARCHAR(100),
+    provider VARCHAR(20) NOT NULL DEFAULT 'claude',
     user_prompt TEXT NOT NULL,
     agent_output LONGTEXT,
     contact_id INT UNSIGNED NULL,
@@ -66,7 +67,10 @@ INSERT IGNORE INTO settings (setting_key, setting_value) VALUES
 ('checkpoint_inbound', '0'),
 ('checkpoint_product', '0'),
 ('checkpoint_energy', '0'),
-('default_lang', 'en');
+('default_lang', 'en'),
+('anthropic_api_key', ''),
+('gemini_api_key', ''),
+('perplexity_api_key', '');
 
 -- Demo contacts — generic, no real personal data
 INSERT IGNORE INTO contacts (id, company_name, contact_name, email, source, status, pipeline_stage, notes) VALUES
