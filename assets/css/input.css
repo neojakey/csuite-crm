@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source "../../modules/*.php";
+@source "../../partials/*.php";
+@source "../../assets/js/app.js";
 
 @layer utilities {
     .line-clamp-4 {
