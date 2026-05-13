@@ -71,113 +71,113 @@ require __DIR__ . '/../partials/nav.php';
     <?php if ( $flash = get_flash( 'success' ) ) : ?><div class="mb-4 px-4 py-3 bg-green-500/10 border border-green-500/30 rounded-md text-green-400 text-sm flash-message"><?= $flash ?></div><?php endif; ?>
     <?php if ( $flash = get_flash( 'error' ) ) : ?><div class="mb-4 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-md text-red-400 text-sm flash-message"><?= $flash ?></div><?php endif; ?>
     <?php if ( $hash = get_flash( 'pw_hash' ) ) : ?>
-    <div class="mb-4 px-4 py-3 bg-slate-700 border border-slate-600 rounded-md">
-        <p class="text-xs text-slate-400 mb-1">Paste this into <code>config/auth.php</code> as the value of <code>password_hash</code>:</p>
-        <code class="text-xs text-cyan-400 break-all"><?= htmlspecialchars( $hash, ENT_QUOTES, 'UTF-8' ) ?></code>
+    <div class="mb-4 px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-md">
+        <p class="text-xs text-zinc-400 mb-1">Paste this into <code>config/auth.php</code> as the value of <code>password_hash</code>:</p>
+        <code class="text-xs text-orange-400 break-all"><?= htmlspecialchars( $hash, ENT_QUOTES, 'UTF-8' ) ?></code>
     </div>
     <?php endif; ?>
 
     <!-- Sprint settings -->
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
-        <h2 class="text-sm font-semibold text-slate-300 mb-4"><?= __( 'dashboard.sprint_week' ) ?></h2>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 mb-4">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-4"><?= __( 'dashboard.sprint_week' ) ?></h2>
         <form method="post" action="<?= BASE_URL ?>index.php?page=settings">
             <?= csrf_field() ?>
             <input type="hidden" name="save_settings" value="1">
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.sprint_week' ) ?></label>
+                    <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.sprint_week' ) ?></label>
                     <input type="number" name="sprint_week" min="1" max="52"
                            value="<?= (int) ( $settings['sprint_week'] ?? 1 ) ?>"
-                           class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                           class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.sprint_total' ) ?></label>
+                    <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.sprint_total' ) ?></label>
                     <input type="number" name="sprint_total_weeks" min="1" max="52"
                            value="<?= (int) ( $settings['sprint_total_weeks'] ?? 12 ) ?>"
-                           class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                           class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
                 </div>
             </div>
             <div class="mb-4">
-                <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.checkpoint_date' ) ?></label>
+                <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.checkpoint_date' ) ?></label>
                 <input type="text" name="checkpoint_date"
                        value="<?= htmlspecialchars( $settings['checkpoint_date'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
                        placeholder="e.g. 30 June 2026"
-                       class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                       class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
             </div>
-            <button type="submit" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-medium px-4 py-2 rounded-md text-sm"><?= __( 'ui.save' ) ?></button>
+            <button type="submit" class="bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium px-4 py-2 rounded-md text-sm"><?= __( 'ui.save' ) ?></button>
         </form>
     </div>
 
     <!-- API Keys -->
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
-        <h2 class="text-sm font-semibold text-slate-300 mb-1">API Keys</h2>
-        <p class="text-xs text-slate-500 mb-4">Keys are stored in the database. Leave blank to use the value from <code>.env</code> (Anthropic only).</p>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 mb-4">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-1">API Keys</h2>
+        <p class="text-xs text-zinc-500 mb-4">Keys are stored in the database. Leave blank to use the value from <code>.env</code> (Anthropic only).</p>
         <div class="space-y-4">
             <div>
                 <div class="flex justify-between items-end mb-1">
-                    <label class="block text-xs text-slate-400">Anthropic API Key</label>
-                    <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                    <label class="block text-xs text-zinc-400">Anthropic API Key</label>
+                    <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-[10px] text-orange-500 hover:text-orange-400">Get key &rarr;</a>
                 </div>
                 <div class="flex gap-2">
                     <input type="password" id="anthropic-key-input"
                            value="<?= htmlspecialchars( $settings['anthropic_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
                            placeholder="sk-ant-api03-…"
-                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
-                    <button id="test-anthropic-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                           class="flex-1 bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-orange-500 font-mono">
+                    <button id="test-anthropic-btn" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
                 </div>
                 <div id="test-anthropic-result" class="hidden text-sm mt-2"></div>
             </div>
             <div>
                 <div class="flex justify-between items-end mb-1">
-                    <label class="block text-xs text-slate-400">Gemini API Key</label>
-                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                    <label class="block text-xs text-zinc-400">Gemini API Key</label>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-orange-500 hover:text-orange-400">Get key &rarr;</a>
                 </div>
                 <div class="flex gap-2">
                     <input type="password" id="gemini-key-input"
                            value="<?= htmlspecialchars( $settings['gemini_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
                            placeholder="AIza…"
-                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
-                    <button id="test-gemini-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                           class="flex-1 bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-orange-500 font-mono">
+                    <button id="test-gemini-btn" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
                 </div>
                 <div id="test-gemini-result" class="hidden text-sm mt-2"></div>
             </div>
             <div>
                 <div class="flex justify-between items-end mb-1">
-                    <label class="block text-xs text-slate-400">Perplexity API Key</label>
-                    <a href="https://www.perplexity.ai/settings/api" target="_blank" class="text-[10px] text-cyan-500 hover:text-cyan-400">Get key &rarr;</a>
+                    <label class="block text-xs text-zinc-400">Perplexity API Key</label>
+                    <a href="https://www.perplexity.ai/settings/api" target="_blank" class="text-[10px] text-orange-500 hover:text-orange-400">Get key &rarr;</a>
                 </div>
                 <div class="flex gap-2">
                     <input type="password" id="perplexity-key-input"
                            value="<?= htmlspecialchars( $settings['perplexity_api_key'] ?? '', ENT_QUOTES, 'UTF-8' ) ?>"
                            placeholder="pplx-…"
-                           class="flex-1 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono">
-                    <button id="test-perplexity-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
+                           class="flex-1 bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-orange-500 font-mono">
+                    <button id="test-perplexity-btn" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-3 py-2 rounded-md text-sm whitespace-nowrap">Test</button>
                 </div>
                 <div id="test-perplexity-result" class="hidden text-sm mt-2"></div>
             </div>
         </div>
-        <button id="save-api-keys-btn" class="mt-4 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-medium px-4 py-2 rounded-md text-sm"><?= __( 'ui.save' ) ?></button>
+        <button id="save-api-keys-btn" class="mt-4 bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium px-4 py-2 rounded-md text-sm"><?= __( 'ui.save' ) ?></button>
         <span id="save-api-keys-result" class="hidden text-sm ml-3 self-center"></span>
     </div>
 
     <!-- API test (legacy) -->
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
-        <h2 class="text-sm font-semibold text-slate-300 mb-4"><?= __( 'settings.api_test' ) ?></h2>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 mb-4">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-4"><?= __( 'settings.api_test' ) ?></h2>
         <div class="flex items-center gap-3">
-            <button id="api-test-btn" class="bg-slate-700 hover:bg-slate-600 text-slate-100 px-4 py-2 rounded-md text-sm"><?= __( 'settings.api_test' ) ?></button>
+            <button id="api-test-btn" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-4 py-2 rounded-md text-sm"><?= __( 'settings.api_test' ) ?></button>
             <span id="api-test-result" class="text-sm hidden"></span>
         </div>
     </div>
 
     <!-- Language -->
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-4">
-        <h2 class="text-sm font-semibold text-slate-300 mb-3"><?= __( 'settings.language' ) ?></h2>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 mb-4">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-3"><?= __( 'settings.language' ) ?></h2>
         <div class="flex gap-2">
             <?php foreach ( [ 'en' => 'English', 'es' => 'Español' ] as $code => $label ) : ?>
             <form method="post" action="<?= BASE_URL ?>api/lang.php">
                 <input type="hidden" name="lang" value="<?= $code ?>">
                 <button type="submit"
-                        class="px-4 py-2 rounded-md text-sm transition-colors <?= ( $_SESSION['lang'] ?? 'en' ) === $code ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50' : 'bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600' ?>">
+                        class="px-4 py-2 rounded-md text-sm transition-colors <?= ( $_SESSION['lang'] ?? 'en' ) === $code ? 'bg-orange-500/20 text-orange-400 border border-orange-500/50' : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700' ?>">
                     <?= $label ?>
                 </button>
             </form>
@@ -186,33 +186,33 @@ require __DIR__ . '/../partials/nav.php';
     </div>
 
     <!-- Password change -->
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-6">
-        <h2 class="text-sm font-semibold text-slate-300 mb-4"><?= __( 'settings.password_change' ) ?></h2>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-4"><?= __( 'settings.password_change' ) ?></h2>
         <?php if ( $pw_err = get_flash( 'pw_error' ) ) : ?>
         <div class="mb-4 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-md text-red-400 text-sm"><?= htmlspecialchars( $pw_err, ENT_QUOTES, 'UTF-8' ) ?></div>
         <?php endif; ?>
-        <p class="text-xs text-slate-500 mb-4">Generates a new bcrypt hash. You must paste it into <code>config/auth.php</code> manually.</p>
+        <p class="text-xs text-zinc-500 mb-4">Generates a new bcrypt hash. You must paste it into <code>config/auth.php</code> manually.</p>
         <form method="post" action="<?= BASE_URL ?>index.php?page=settings">
             <?= csrf_field() ?>
             <input type="hidden" name="change_password" value="1">
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.password_current' ) ?></label>
+                    <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.password_current' ) ?></label>
                     <input type="password" name="password_current" required autocomplete="current-password"
-                           class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                           class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.password_new' ) ?></label>
+                    <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.password_new' ) ?></label>
                     <input type="password" name="password_new" required minlength="8" autocomplete="new-password"
-                           class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                           class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1"><?= __( 'settings.password_confirm' ) ?></label>
+                    <label class="block text-xs text-zinc-400 mb-1"><?= __( 'settings.password_confirm' ) ?></label>
                     <input type="password" name="password_confirm" required autocomplete="new-password"
-                           class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                           class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
                 </div>
             </div>
-            <button type="submit" class="mt-4 bg-slate-700 hover:bg-slate-600 text-slate-100 px-4 py-2 rounded-md text-sm"><?= __( 'settings.password_change' ) ?></button>
+            <button type="submit" class="mt-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 px-4 py-2 rounded-md text-sm"><?= __( 'settings.password_change' ) ?></button>
         </form>
     </div>
 </main>

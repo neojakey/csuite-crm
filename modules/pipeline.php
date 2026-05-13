@@ -22,7 +22,7 @@ foreach ( $all as $contact ) {
 }
 
 $stage_meta = [
-    'lead'        => [ 'dot' => 'bg-slate-400',  'label' => 'text-slate-300' ],
+    'lead'        => [ 'dot' => 'bg-zinc-400',  'label' => 'text-zinc-300' ],
     'qualified'   => [ 'dot' => 'bg-blue-400',   'label' => 'text-blue-400' ],
     'proposal'    => [ 'dot' => 'bg-amber-400',  'label' => 'text-amber-400' ],
     'negotiation' => [ 'dot' => 'bg-purple-400', 'label' => 'text-purple-400' ],
@@ -31,11 +31,11 @@ $stage_meta = [
 ];
 
 $status_colors = [
-    'prospect' => 'bg-slate-600/50 text-slate-400',
+    'prospect' => 'bg-zinc-700/50 text-zinc-400',
     'warm'     => 'bg-amber-500/20 text-amber-400',
-    'active'   => 'bg-cyan-500/20 text-cyan-400',
+    'active'   => 'bg-orange-500/20 text-orange-400',
     'customer' => 'bg-green-500/20 text-green-400',
-    'dormant'  => 'bg-slate-700/50 text-slate-500',
+    'dormant'  => 'bg-zinc-800/50 text-zinc-500',
     'lost'     => 'bg-red-500/20 text-red-400',
 ];
 
@@ -46,15 +46,15 @@ require __DIR__ . '/../partials/nav.php';
 
 <style>
 .pipeline-drop-zone.drag-over {
-    background-color: rgba(51, 65, 85, 0.4);
-    outline: 1px dashed #475569;
+    background-color: rgba(39, 39, 42, 0.5);
+    outline: 1px dashed #52525b;
     border-radius: 0.5rem;
 }
 </style>
 
 <main class="flex-1 md:ml-56 p-6 pt-20 md:pt-6 overflow-hidden">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-slate-100"><?= __( 'pipeline.title' ) ?></h1>
+        <h1 class="text-2xl font-bold text-zinc-100"><?= __( 'pipeline.title' ) ?></h1>
     </div>
 
     <div class="flex gap-4 overflow-x-auto pb-6 -mx-6 px-6">
@@ -63,24 +63,24 @@ require __DIR__ . '/../partials/nav.php';
         <!-- Unassigned column -->
         <div class="pipeline-column flex-none w-60" data-stage="">
             <div class="flex items-center gap-2 mb-3">
-                <span class="w-2 h-2 rounded-full bg-slate-500"></span>
-                <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wide"><?= __( 'pipeline.stage.unassigned' ) ?></h2>
-                <span class="pipeline-count text-xs text-slate-500 ml-1"><?= count( $unassigned ) ?></span>
+                <span class="w-2 h-2 rounded-full bg-zinc-500"></span>
+                <h2 class="text-xs font-semibold text-zinc-400 uppercase tracking-wide"><?= __( 'pipeline.stage.unassigned' ) ?></h2>
+                <span class="pipeline-count text-xs text-zinc-500 ml-1"><?= count( $unassigned ) ?></span>
             </div>
             <div class="pipeline-drop-zone min-h-20 space-y-2 rounded-lg p-1" data-stage="">
                 <?php foreach ( $unassigned as $c ) :
-                    $sc = $status_colors[ $c['status'] ] ?? 'bg-slate-600/50 text-slate-400';
+                    $sc = $status_colors[ $c['status'] ] ?? 'bg-zinc-700/50 text-zinc-400';
                 ?>
-                <div class="pipeline-card bg-slate-800 border border-slate-700 rounded-lg p-3 cursor-grab select-none hover:border-slate-600 transition-colors"
+                <div class="pipeline-card bg-zinc-900 border border-zinc-800 rounded-lg p-3 cursor-grab select-none hover:border-zinc-700 transition-colors"
                      draggable="true"
                      data-id="<?= (int) $c['id'] ?>">
-                    <p class="text-sm font-medium text-slate-100 truncate"><?= e( $c['company_name'] ) ?></p>
+                    <p class="text-sm font-medium text-zinc-100 truncate"><?= e( $c['company_name'] ) ?></p>
                     <?php if ( $c['contact_name'] ) : ?>
-                    <p class="text-xs text-slate-400 truncate mt-0.5"><?= e( $c['contact_name'] ) ?></p>
+                    <p class="text-xs text-zinc-400 truncate mt-0.5"><?= e( $c['contact_name'] ) ?></p>
                     <?php endif; ?>
                     <div class="flex items-center justify-between mt-2">
                         <span class="inline-block px-1.5 py-0.5 text-[10px] rounded <?= $sc ?>"><?= e( $c['status'] ) ?></span>
-                        <a href="<?= e( BASE_URL . 'index.php?page=contacts&action=view&id=' . (int) $c['id'] ) ?>" class="text-[10px] text-cyan-500 hover:text-cyan-400">View →</a>
+                        <a href="<?= e( BASE_URL . 'index.php?page=contacts&action=view&id=' . (int) $c['id'] ) ?>" class="text-[10px] text-orange-500 hover:text-orange-400">View →</a>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -96,22 +96,22 @@ require __DIR__ . '/../partials/nav.php';
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full <?= $meta['dot'] ?>"></span>
                 <h2 class="text-xs font-semibold <?= $meta['label'] ?> uppercase tracking-wide"><?= __( 'pipeline.stage.' . $stage ) ?></h2>
-                <span class="pipeline-count text-xs text-slate-500 ml-1"><?= count( $contacts ) ?></span>
+                <span class="pipeline-count text-xs text-zinc-500 ml-1"><?= count( $contacts ) ?></span>
             </div>
             <div class="pipeline-drop-zone min-h-20 space-y-2 rounded-lg p-1" data-stage="<?= $stage ?>">
                 <?php foreach ( $contacts as $c ) :
-                    $sc = $status_colors[ $c['status'] ] ?? 'bg-slate-600/50 text-slate-400';
+                    $sc = $status_colors[ $c['status'] ] ?? 'bg-zinc-700/50 text-zinc-400';
                 ?>
-                <div class="pipeline-card bg-slate-800 border border-slate-700 rounded-lg p-3 cursor-grab select-none hover:border-slate-600 transition-colors"
+                <div class="pipeline-card bg-zinc-900 border border-zinc-800 rounded-lg p-3 cursor-grab select-none hover:border-zinc-700 transition-colors"
                      draggable="true"
                      data-id="<?= (int) $c['id'] ?>">
-                    <p class="text-sm font-medium text-slate-100 truncate"><?= e( $c['company_name'] ) ?></p>
+                    <p class="text-sm font-medium text-zinc-100 truncate"><?= e( $c['company_name'] ) ?></p>
                     <?php if ( $c['contact_name'] ) : ?>
-                    <p class="text-xs text-slate-400 truncate mt-0.5"><?= e( $c['contact_name'] ) ?></p>
+                    <p class="text-xs text-zinc-400 truncate mt-0.5"><?= e( $c['contact_name'] ) ?></p>
                     <?php endif; ?>
                     <div class="flex items-center justify-between mt-2">
                         <span class="inline-block px-1.5 py-0.5 text-[10px] rounded <?= $sc ?>"><?= e( $c['status'] ) ?></span>
-                        <a href="<?= e( BASE_URL . 'index.php?page=contacts&action=view&id=' . (int) $c['id'] ) ?>" class="text-[10px] text-cyan-500 hover:text-cyan-400">View →</a>
+                        <a href="<?= e( BASE_URL . 'index.php?page=contacts&action=view&id=' . (int) $c['id'] ) ?>" class="text-[10px] text-orange-500 hover:text-orange-400">View →</a>
                     </div>
                 </div>
                 <?php endforeach; ?>

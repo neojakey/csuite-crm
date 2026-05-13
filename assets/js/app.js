@@ -39,11 +39,11 @@
 
             // Update tab styles
             agentTabs.forEach(function (t) {
-                t.classList.remove('bg-slate-800', 'border-slate-700', 'border-b-slate-800', 'text-cyan-400');
-                t.classList.add('text-slate-400');
+                t.classList.remove('bg-zinc-900', 'border-zinc-800', 'border-b-zinc-900', 'text-orange-400');
+                t.classList.add('text-zinc-400');
             });
-            this.classList.add('bg-slate-800', 'border-slate-700', 'border-b-slate-800', 'text-cyan-400');
-            this.classList.remove('text-slate-400');
+            this.classList.add('bg-zinc-900', 'border-zinc-800', 'border-b-zinc-900', 'text-orange-400');
+            this.classList.remove('text-zinc-400');
 
             // Show/hide panels
             document.querySelectorAll('.agent-panel').forEach(function (panel) {
@@ -67,8 +67,8 @@
 
             // Deselect all chips in this role
             document.querySelectorAll('.mode-chip[data-role="' + role + '"]').forEach(function (c) {
-                c.classList.remove('border-cyan-500', 'text-cyan-400', 'bg-cyan-500/10');
-                c.classList.add('border-slate-600', 'text-slate-400');
+                c.classList.remove('border-orange-500', 'text-orange-400', 'bg-orange-500/10');
+                c.classList.add('border-zinc-700', 'text-zinc-400');
             });
 
             if (selectedModes[role] === mode) {
@@ -77,8 +77,8 @@
             } else {
                 // Select this chip
                 selectedModes[role] = mode;
-                this.classList.add('border-cyan-500', 'text-cyan-400', 'bg-cyan-500/10');
-                this.classList.remove('border-slate-600', 'text-slate-400');
+                this.classList.add('border-orange-500', 'text-orange-400', 'bg-orange-500/10');
+                this.classList.remove('border-zinc-700', 'text-zinc-400');
             }
         });
     });
@@ -130,8 +130,8 @@
                 if (data.success && data.output) {
                     if (outputEl) {
                         outputEl.textContent = data.output;
-                        outputEl.classList.remove('text-slate-400');
-                        outputEl.classList.add('text-slate-100');
+                        outputEl.classList.remove('text-zinc-400');
+                        outputEl.classList.add('text-zinc-100');
                     }
                     if (copyBtn) copyBtn.classList.remove('hidden');
                     if (saveBtn) saveBtn.classList.remove('hidden');
@@ -233,8 +233,8 @@
             if (promptEl) promptEl.value    = this.dataset.prompt || '';
             if (outputEl) {
                 outputEl.textContent = this.dataset.output || '';
-                outputEl.classList.remove('text-slate-400');
-                outputEl.classList.add('text-slate-100');
+                outputEl.classList.remove('text-zinc-400');
+                outputEl.classList.add('text-zinc-100');
             }
             if (copyBtn && this.dataset.output) copyBtn.classList.remove('hidden');
         });
@@ -257,8 +257,8 @@
                 if (data.success !== undefined) {
                     var isOn     = data.value === 1;
                     var knob     = toggle.querySelector('span');
-                    toggle.classList.toggle('bg-cyan-500', isOn);
-                    toggle.classList.toggle('bg-slate-600', !isOn);
+                    toggle.classList.toggle('bg-orange-500', isOn);
+                    toggle.classList.toggle('bg-zinc-700', !isOn);
                     if (knob) {
                         knob.classList.toggle('translate-x-5', isOn);
                         knob.classList.toggle('translate-x-0', !isOn);
@@ -324,9 +324,9 @@
                         
                         // Append to UI
                         var div = document.createElement('div');
-                        div.className = 'bg-slate-800 border border-slate-700 rounded-lg p-4';
-                        div.innerHTML = '<h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">' + p + '</h4>' +
-                                        '<div class="text-sm text-slate-300 whitespace-pre-wrap">' + data.output.replace(/</g, '&lt;') + '</div>';
+                        div.className = 'bg-zinc-900 border border-zinc-800 rounded-lg p-4';
+                        div.innerHTML = '<h4 class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-2">' + p + '</h4>' +
+                                        '<div class="text-sm text-zinc-300 whitespace-pre-wrap">' + data.output.replace(/</g, '&lt;') + '</div>';
                         outputs.appendChild(div);
                     } else {
                         results[p] = 'Error: ' + (data.error || 'Failed');
@@ -361,9 +361,9 @@
                 if (data.success && data.output) {
                     if (synthStatus) synthStatus.textContent = 'Synthesis: Done ✓';
                     var div = document.createElement('div');
-                    div.className = 'bg-cyan-900/20 border border-cyan-800 rounded-lg p-4 mt-6';
-                    div.innerHTML = '<h4 class="text-xs font-semibold text-cyan-400 uppercase tracking-wide mb-2">Final Synthesis (Claude)</h4>' +
-                                    '<div class="text-sm text-slate-100 whitespace-pre-wrap">' + data.output.replace(/</g, '&lt;') + '</div>';
+                    div.className = 'bg-orange-900/20 border border-orange-800 rounded-lg p-4 mt-6';
+                    div.innerHTML = '<h4 class="text-xs font-semibold text-orange-400 uppercase tracking-wide mb-2">Final Synthesis (Claude)</h4>' +
+                                    '<div class="text-sm text-zinc-100 whitespace-pre-wrap">' + data.output.replace(/</g, '&lt;') + '</div>';
                     outputs.appendChild(div);
                 } else {
                     if (synthStatus) synthStatus.textContent = 'Synthesis: Failed ✗';

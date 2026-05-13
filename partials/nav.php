@@ -31,9 +31,9 @@ $nav_items = [
 ];
 ?>
 <!-- Mobile hamburger -->
-<div class="md:hidden fixed top-0 left-0 right-0 z-20 bg-slate-900 border-b border-slate-700 flex items-center justify-between px-4 py-3">
-    <span class="text-cyan-400 font-bold">csuite</span><span class="text-slate-400 font-bold">-crm</span>
-    <button id="mobile-menu-toggle" class="text-slate-400 hover:text-slate-100" aria-label="Menu">
+<div class="md:hidden fixed top-0 left-0 right-0 z-20 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-4 py-3">
+    <span class="text-orange-400 font-bold">csuite</span><span class="text-zinc-400 font-bold">-crm</span>
+    <button id="mobile-menu-toggle" class="text-zinc-400 hover:text-zinc-100" aria-label="Menu">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -41,15 +41,15 @@ $nav_items = [
 </div>
 
 <!-- Sidebar -->
-<nav id="sidebar" class="w-56 bg-slate-900 border-r border-slate-700 min-h-screen fixed left-0 top-0 flex flex-col z-10 -translate-x-full md:translate-x-0 transition-transform duration-200">
-    <div class="p-4 border-b border-slate-700 hidden md:block">
-        <span class="text-cyan-400 font-bold text-lg">csuite</span><span class="text-slate-400 font-bold text-lg">-crm</span>
+<nav id="sidebar" class="w-56 bg-zinc-950 border-r border-zinc-800 min-h-screen fixed left-0 top-0 flex flex-col z-10 -translate-x-full md:translate-x-0 transition-transform duration-200">
+    <div class="p-4 border-b border-zinc-800 hidden md:block">
+        <span class="text-orange-400 font-bold text-lg">csuite</span><span class="text-zinc-400 font-bold text-lg">-crm</span>
     </div>
     <div class="flex-1 p-3 space-y-1 mt-14 md:mt-0">
         <?php foreach ( $nav_items as $nav_page => $item ) :
             $active = ( $page === $nav_page )
-                ? 'bg-cyan-500/10 text-cyan-400'
-                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800';
+                ? 'bg-orange-500/10 text-orange-400'
+                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900';
         ?>
         <a href="<?= BASE_URL ?>index.php?page=<?= $nav_page ?>"
            class="flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors <?= $active ?>">
@@ -58,14 +58,14 @@ $nav_items = [
         </a>
         <?php endforeach; ?>
     </div>
-    <div class="p-3 border-t border-slate-700 space-y-2">
+    <div class="p-3 border-t border-zinc-800 space-y-2">
         <!-- Language switcher -->
         <div class="flex gap-1">
             <?php foreach ( [ 'en', 'es' ] as $lang_code ) : ?>
             <form method="post" action="<?= BASE_URL ?>api/lang.php" class="flex-1">
                 <input type="hidden" name="lang" value="<?= $lang_code ?>">
                 <button type="submit"
-                    class="w-full text-xs px-2 py-1 rounded transition-colors <?= ( $_SESSION['lang'] ?? 'en' ) === $lang_code ? 'bg-cyan-500/20 text-cyan-400 font-medium' : 'text-slate-500 hover:text-slate-300' ?>">
+                    class="w-full text-xs px-2 py-1 rounded transition-colors <?= ( $_SESSION['lang'] ?? 'en' ) === $lang_code ? 'bg-orange-500/20 text-orange-400 font-medium' : 'text-zinc-500 hover:text-zinc-300' ?>">
                     <?= __( 'ui.language_' . $lang_code ) ?>
                 </button>
             </form>
@@ -73,7 +73,7 @@ $nav_items = [
         </div>
         <!-- Logout -->
         <a href="<?= BASE_URL ?>index.php?page=logout"
-           class="flex items-center gap-2 px-3 py-2 text-sm text-slate-400 hover:text-red-400 rounded-md transition-colors">
+           class="flex items-center gap-2 px-3 py-2 text-sm text-zinc-400 hover:text-red-400 rounded-md transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
             </svg>

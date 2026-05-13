@@ -6,7 +6,7 @@
     <!-- Floating button -->
     <button id="chat-toggle"
             aria-label="Open CRM Assistant"
-            class="fixed bottom-5 right-5 z-50 w-13 h-13 bg-cyan-500 hover:bg-cyan-400 text-slate-900 rounded-full shadow-lg flex items-center justify-center transition-colors"
+            class="fixed bottom-5 right-5 z-50 w-13 h-13 bg-orange-500 hover:bg-orange-400 text-zinc-950 rounded-full shadow-lg flex items-center justify-center transition-colors"
             style="width:3.25rem;height:3.25rem;">
         <svg id="chat-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
@@ -18,44 +18,44 @@
 
     <!-- Panel -->
     <div id="chat-panel"
-         class="fixed bottom-20 right-5 z-50 hidden flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl"
+         class="fixed bottom-20 right-5 z-50 hidden flex-col bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl"
          style="width:380px;height:520px;">
 
         <!-- Header -->
-        <div class="flex items-center justify-between px-4 py-3 border-b border-slate-700 flex-shrink-0">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
             <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <span class="text-sm font-semibold text-slate-100">CRM Assistant</span>
+                <span class="w-2 h-2 rounded-full bg-orange-400"></span>
+                <span class="text-sm font-semibold text-zinc-100">CRM Assistant</span>
             </div>
-            <button id="chat-clear" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Clear</button>
+            <button id="chat-clear" class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">Clear</button>
         </div>
 
         <!-- Messages -->
         <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm">
-            <div class="text-xs text-slate-500 text-center">Ask me anything or tell me what to do — I can read and update your CRM.</div>
+            <div class="text-xs text-zinc-500 text-center">Ask me anything or tell me what to do — I can read and update your CRM.</div>
         </div>
 
         <!-- Thinking indicator -->
         <div id="chat-thinking" class="hidden px-4 pb-2 flex-shrink-0">
-            <div class="flex items-center gap-2 text-xs text-slate-500">
+            <div class="flex items-center gap-2 text-xs text-zinc-500">
                 <span class="flex gap-0.5">
-                    <span class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce" style="animation-delay:0ms"></span>
-                    <span class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce" style="animation-delay:150ms"></span>
-                    <span class="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+                    <span class="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+                    <span class="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+                    <span class="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style="animation-delay:300ms"></span>
                 </span>
                 <span>Thinking...</span>
             </div>
         </div>
 
         <!-- Input -->
-        <div class="flex gap-2 px-3 pb-3 pt-2 border-t border-slate-700 flex-shrink-0">
+        <div class="flex gap-2 px-3 pb-3 pt-2 border-t border-zinc-800 flex-shrink-0">
             <textarea id="chat-input"
                       rows="1"
                       placeholder="Ask or instruct..."
-                      class="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 resize-none"
+                      class="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-orange-500 resize-none"
                       style="max-height:96px;overflow-y:auto;"></textarea>
             <button id="chat-send"
-                    class="bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-slate-900 font-medium px-3 py-2 rounded-lg text-sm transition-colors flex-shrink-0">
+                    class="bg-orange-500 hover:bg-orange-400 disabled:opacity-40 disabled:cursor-not-allowed text-zinc-950 font-medium px-3 py-2 rounded-lg text-sm transition-colors flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                 </svg>
@@ -101,7 +101,7 @@
         escaped = escaped
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g,     '<em>$1</em>')
-            .replace(/`([^`]+)`/g,     '<code class="bg-slate-700 px-1 rounded text-xs font-mono">$1</code>');
+            .replace(/`([^`]+)`/g,     '<code class="bg-zinc-800 px-1 rounded text-xs font-mono">$1</code>');
 
         // Bullet lists — lines starting with - or •
         var lines = escaped.split('\n');
@@ -127,10 +127,10 @@
         var div = document.createElement('div');
         if (role === 'user') {
             div.className = 'flex justify-end';
-            div.innerHTML = '<div class="bg-cyan-500/20 border border-cyan-500/30 text-slate-100 rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] text-sm">' + renderMarkdown(text) + '</div>';
+            div.innerHTML = '<div class="bg-orange-500/20 border border-orange-500/30 text-zinc-100 rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] text-sm">' + renderMarkdown(text) + '</div>';
         } else {
             div.className = 'flex justify-start';
-            div.innerHTML = '<div class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl rounded-tl-sm px-3 py-2 max-w-[85%] text-sm leading-relaxed">' + renderMarkdown(text) + '</div>';
+            div.innerHTML = '<div class="bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-xl rounded-tl-sm px-3 py-2 max-w-[85%] text-sm leading-relaxed">' + renderMarkdown(text) + '</div>';
         }
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
@@ -206,7 +206,7 @@
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({ action: 'clear' }),
         });
-        messages.innerHTML = '<div class="text-xs text-slate-500 text-center">Ask me anything or tell me what to do — I can read and update your CRM.</div>';
+        messages.innerHTML = '<div class="text-xs text-zinc-500 text-center">Ask me anything or tell me what to do — I can read and update your CRM.</div>';
     });
 })();
 </script>

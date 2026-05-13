@@ -30,12 +30,12 @@ $error = get_flash( 'auth_error' );
     <title><?= __( 'auth.login' ) ?> — <?= APP_NAME ?></title>
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/output.css">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex items-center justify-center">
 <div class="w-full max-w-sm">
     <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold"><span class="text-cyan-400">csuite</span><span class="text-slate-400">-crm</span></h1>
+        <h1 class="text-2xl font-bold"><span class="text-orange-400">csuite</span><span class="text-zinc-400">-crm</span></h1>
     </div>
-    <div class="bg-slate-800 border border-slate-700 rounded-lg p-8">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-8">
         <?php if ( $error ) : ?>
         <div class="mb-4 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-md text-red-400 text-sm">
             <?= $error ?>
@@ -44,16 +44,16 @@ $error = get_flash( 'auth_error' );
         <form method="post" action="<?= BASE_URL ?>index.php?page=login">
             <?= csrf_field() ?>
             <div class="mb-6">
-                <label for="password" class="block text-sm text-slate-400 mb-2"><?= __( 'auth.password' ) ?></label>
+                <label for="password" class="block text-sm text-zinc-400 mb-2"><?= __( 'auth.password' ) ?></label>
                 <input type="password"
                        id="password"
                        name="password"
                        autocomplete="current-password"
                        required
-                       class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-500">
+                       class="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 w-full focus:outline-none focus:border-orange-500">
             </div>
             <button type="submit"
-                    class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-medium px-4 py-2 rounded-md text-sm transition-colors">
+                    class="w-full bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium px-4 py-2 rounded-md text-sm transition-colors">
                 <?= __( 'auth.login' ) ?>
             </button>
         </form>

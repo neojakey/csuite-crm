@@ -6,4 +6,4 @@
     <title><?= isset( $page_title ) ? htmlspecialchars( $page_title, ENT_QUOTES, 'UTF-8' ) . ' — ' : '' ?><?= APP_NAME ?></title>
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/output.css">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex">
