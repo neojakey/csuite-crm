@@ -95,7 +95,7 @@ if ( $page === 'login' && ! empty( $_SESSION['authenticated'] ) ) {
 }
 
 // Allowlist
-$allowed_pages = [ 'login', 'dashboard', 'contacts', 'agent', 'notes', 'tasks', 'settings' ];
+$allowed_pages = [ 'login', 'dashboard', 'contacts', 'pipeline', 'agent', 'notes', 'tasks', 'settings' ];
 if ( ! in_array( $page, $allowed_pages, true ) ) {
     $page = 'dashboard';
 }

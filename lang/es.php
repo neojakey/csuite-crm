@@ -7,6 +7,7 @@ return [
     'nav.notes'         => 'Notas',
     'nav.tasks'         => 'Tareas',
     'nav.settings'      => 'Configuración',
+    'nav.pipeline'      => 'Pipeline',
     'nav.logout'        => 'Cerrar sesión',
 
     'auth.password'         => 'Contraseña',
@@ -27,6 +28,16 @@ return [
     'dashboard.quick_launch'        => 'Acceso rápido',
     'dashboard.no_sessions'         => 'No hay sesiones con agentes todavía.',
     'dashboard.no_tasks'            => 'No hay tareas abiertas.',
+
+    // Pipeline
+    'pipeline.title'              => 'Pipeline',
+    'pipeline.stage.unassigned'   => 'Sin etapa',
+    'pipeline.stage.lead'         => 'Contacto',
+    'pipeline.stage.qualified'    => 'Cualificado',
+    'pipeline.stage.proposal'     => 'Propuesta',
+    'pipeline.stage.negotiation'  => 'Negociación',
+    'pipeline.stage.won'          => 'Ganado',
+    'pipeline.stage.lost'         => 'Perdido',
 
     'contacts.title'            => 'Contactos',
     'contacts.add'              => 'Añadir contacto',

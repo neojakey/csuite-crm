@@ -8,6 +8,7 @@ return [
     'nav.notes'         => 'Notes',
     'nav.tasks'         => 'Tasks',
     'nav.settings'      => 'Settings',
+    'nav.pipeline'      => 'Pipeline',
     'nav.logout'        => 'Log out',
 
     // Auth
@@ -30,6 +31,16 @@ return [
     'dashboard.quick_launch'        => 'Quick launch',
     'dashboard.no_sessions'         => 'No agent sessions yet.',
     'dashboard.no_tasks'            => 'No open tasks.',
+
+    // Pipeline
+    'pipeline.title'              => 'Pipeline',
+    'pipeline.stage.unassigned'   => 'Unassigned',
+    'pipeline.stage.lead'         => 'Lead',
+    'pipeline.stage.qualified'    => 'Qualified',
+    'pipeline.stage.proposal'     => 'Proposal',
+    'pipeline.stage.negotiation'  => 'Negotiation',
+    'pipeline.stage.won'          => 'Won',
+    'pipeline.stage.lost'         => 'Lost',
 
     // Contacts
     'contacts.title'            => 'Contacts',
