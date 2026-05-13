@@ -1,0 +1,14 @@
+# Block direct access to sensitive directories
+<DirectoryMatch "^.*(config|classes|lang|sql)">
+    Require all denied
+</DirectoryMatch>
+
+# Block direct access to .env
+<Files ".env">
+    Require all denied
+</Files>
+
+# Block direct access to .env.example
+<Files ".env.example">
+    Require all denied
+</Files>
