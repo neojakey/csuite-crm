@@ -159,23 +159,73 @@
         thinking.classList.remove('hidden');
         messages.scrollTop = messages.scrollHeight;
 
+        var streamBubble  = null;
+        var streamContent = '';
+        var streamDone    = false;
+
         try {
-            var res  = await fetch(baseUrl + 'api/chat.php', {
+            var res = await fetch(baseUrl + 'api/chat-stream.php', {
                 method:  'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify({ action: 'chat', message: text }),
+                body:    JSON.stringify({ message: text }),
             });
-            var data = await res.json();
+
+            if (!res.ok || !res.body) throw new Error('HTTP ' + res.status);
 
             thinking.classList.add('hidden');
 
-            if (data.error) {
-                appendError(data.error);
-            } else if (data.reply) {
-                appendMessage('assistant', data.reply);
+            var reader  = res.body.getReader();
+            var decoder = new TextDecoder();
+            var sseBuf  = '';
+
+            while (!streamDone) {
+                var chunk = await reader.read();
+                if (chunk.done) break;
+
+                sseBuf += decoder.decode(chunk.value, { stream: true });
+                var lines = sseBuf.split('\n');
+                sseBuf = lines.pop();
+
+                for (var line of lines) {
+                    line = line.trim();
+                    if (!line.startsWith('data: ')) continue;
+                    var evt;
+                    try { evt = JSON.parse(line.slice(6)); } catch (e) { continue; }
+
+                    if (evt.type === 'token') {
+                        if (!streamBubble) {
+                            streamBubble = document.createElement('div');
+                            streamBubble.className = 'flex justify-start';
+                            streamBubble.innerHTML = '<div class="bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-xl rounded-tl-sm px-3 py-2 max-w-[85%] text-sm leading-relaxed"></div>';
+                            messages.appendChild(streamBubble);
+                        }
+                        streamContent += evt.text;
+                        streamBubble.querySelector('div').innerHTML = renderMarkdown(streamContent);
+                        messages.scrollTop = messages.scrollHeight;
+
+                    } else if (evt.type === 'tool') {
+                        var toolDiv = document.createElement('div');
+                        toolDiv.className = 'text-xs text-zinc-500 italic text-center py-1';
+                        toolDiv.textContent = evt.label;
+                        messages.appendChild(toolDiv);
+                        messages.scrollTop = messages.scrollHeight;
+
+                    } else if (evt.type === 'error') {
+                        thinking.classList.add('hidden');
+                        if (streamBubble) { streamBubble.remove(); streamBubble = null; }
+                        appendError(evt.message || 'An error occurred.');
+                        streamDone = true;
+                        break;
+
+                    } else if (evt.type === 'done') {
+                        streamDone = true;
+                        break;
+                    }
+                }
             }
         } catch (err) {
             thinking.classList.add('hidden');
+            if (streamBubble) { streamBubble.remove(); streamBubble = null; }
             appendError('Network error. Please try again.');
         }
 

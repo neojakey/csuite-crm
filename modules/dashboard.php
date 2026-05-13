@@ -156,6 +156,52 @@ require __DIR__ . '/../partials/nav.php';
         </div>
     </div>
 
+    <!-- Assistant audit log -->
+    <div class="mt-4 bg-zinc-900 border border-zinc-800 rounded-lg p-5">
+        <h2 class="text-sm font-semibold text-zinc-300 mb-4">Assistant Actions</h2>
+        <?php
+        $audit_rows = [];
+        try {
+            $audit_rows = $pdo->query(
+                'SELECT tool_name, tool_input, success, created_at FROM assistant_actions ORDER BY created_at DESC LIMIT 8'
+            )->fetchAll();
+        } catch ( \Throwable $e ) {
+            // table not yet created — show nothing
+        }
+        $tool_labels = [
+            'create_contact' => 'Created contact',
+            'update_contact' => 'Updated contact',
+            'delete_contact' => 'Deleted contact',
+            'create_task'    => 'Created task',
+            'complete_task'  => 'Completed task',
+            'create_note'    => 'Created note',
+            'run_agent'      => 'Ran agent',
+        ];
+        ?>
+        <?php if ( empty( $audit_rows ) ) : ?>
+        <p class="text-sm text-zinc-500">No assistant actions yet — ask the CRM assistant to create or update something.</p>
+        <?php else : ?>
+        <div class="space-y-1.5">
+            <?php foreach ( $audit_rows as $row ) :
+                $inp    = json_decode( $row['tool_input'] ?? '{}', true ) ?? [];
+                $label  = $tool_labels[ $row['tool_name'] ] ?? ucwords( str_replace( '_', ' ', $row['tool_name'] ) );
+                $detail = $inp['company_name'] ?? $inp['title'] ?? ( isset( $inp['role'] ) ? strtoupper( $inp['role'] ) : '' ) ?? ( isset( $inp['id'] ) ? '#' . $inp['id'] : '' );
+            ?>
+            <div class="flex items-center gap-3 py-1.5 border-b border-zinc-800/50 last:border-0">
+                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 <?= $row['success'] ? 'bg-green-400' : 'bg-red-400' ?>"></span>
+                <span class="text-sm text-zinc-300 flex-1 min-w-0 truncate">
+                    <?= htmlspecialchars( $label, ENT_QUOTES, 'UTF-8' ) ?>
+                    <?php if ( $detail ) : ?>
+                    <span class="text-zinc-500">— <?= htmlspecialchars( $detail, ENT_QUOTES, 'UTF-8' ) ?></span>
+                    <?php endif; ?>
+                </span>
+                <span class="text-xs text-zinc-600 flex-shrink-0"><?= htmlspecialchars( substr( $row['created_at'], 0, 16 ), ENT_QUOTES, 'UTF-8' ) ?></span>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
     <!-- Quick launch -->
     <div class="mt-4 bg-zinc-900 border border-zinc-800 rounded-lg p-5">
         <h2 class="text-sm font-semibold text-zinc-300 mb-4"><?= __( 'dashboard.quick_launch' ) ?></h2>

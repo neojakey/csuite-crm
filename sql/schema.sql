@@ -72,6 +72,15 @@ INSERT IGNORE INTO settings (setting_key, setting_value) VALUES
 ('gemini_api_key', ''),
 ('perplexity_api_key', '');
 
+CREATE TABLE IF NOT EXISTS assistant_actions (
+    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    tool_name   VARCHAR(100) NOT NULL,
+    tool_input  TEXT,
+    tool_result TEXT,
+    success     TINYINT(1) NOT NULL DEFAULT 1,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Demo contacts — generic, no real personal data
 INSERT IGNORE INTO contacts (id, company_name, contact_name, email, source, status, pipeline_stage, notes) VALUES
 (1, 'Demo Company Ltd', 'Demo Contact', 'demo@example.com', 'inbound', 'prospect', 'Initial contact', 'Replace this with a real contact.'),

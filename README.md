@@ -9,6 +9,8 @@ An open-source, self-hosted CRM and AI agent command centre for businesses of an
 - **Six C-suite AI agents** (CEO, CTO, CFO, CMO, CPO, COO) — role-specific modes for strategy, revenue, code review, LinkedIn posts, roadmap prioritisation, and more
 - **Boardroom Debate mode** — when multiple API keys are configured, all providers respond to your prompt in parallel and Claude synthesises the best combined answer
 - **Multi-provider AI** — Anthropic Claude, Google Gemini, and Perplexity all supported; keys managed in Settings and tested without leaving the page
+- **Streaming responses** — the CRM assistant streams tokens word by word using Server-Sent Events; tool calls show as live status labels as they execute
+- **Audit log** — every write action taken by the assistant is logged to the database and shown on the dashboard so you always know what it changed
 - **CRM** — contacts with status and pipeline stage, notes, tasks, and agent session history all linked to each record
 - **Sprint tracker** — dashboard with sprint week progress bar, checkpoint date, and three configurable signal criteria
 - **Fully yours** — all data lives in your MySQL database on your own server; no telemetry, no third-party scripts
