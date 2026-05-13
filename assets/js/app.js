@@ -89,7 +89,7 @@
             var role       = this.dataset.role;
             var promptEl   = document.querySelector('.agent-prompt[data-role="' + role + '"]');
             var contactEl  = document.querySelector('.agent-contact[data-role="' + role + '"]');
-            var providerEl = document.querySelector('.agent-provider[data-role="' + role + '"]:checked');
+            var providerEl = document.querySelector('.agent-provider[data-role="' + role + '"]');
             var loadingEl  = document.querySelector('.agent-loading[data-role="' + role + '"]');
             var errorEl    = document.querySelector('.agent-error[data-role="' + role + '"]');
             var outputEl   = document.querySelector('.agent-output[data-role="' + role + '"]');

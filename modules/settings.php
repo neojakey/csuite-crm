@@ -242,7 +242,7 @@ document.getElementById('save-api-keys-btn').addEventListener('click', async fun
 });
 
 // ── API key test helpers ──────────────────────────────────────────────────────
-async function testApiKey(action, resultId, btn) {
+async function testApiKey(action, resultId, apiKey, btn) {
     btn.disabled = true;
     var span     = document.getElementById(resultId);
     span.className = 'hidden text-sm mt-2';
@@ -250,7 +250,7 @@ async function testApiKey(action, resultId, btn) {
     var res  = await fetch((window.CSUITE?.baseUrl || '/') + 'api/settings.php', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ action }),
+        body:    JSON.stringify({ action, api_key: apiKey }),
     });
     var data = await res.json();
     var errText = data.error ? ' (' + data.error + ')' : '';
@@ -260,13 +260,13 @@ async function testApiKey(action, resultId, btn) {
 }
 
 document.getElementById('test-anthropic-btn').addEventListener('click', function () {
-    testApiKey('test_anthropic', 'test-anthropic-result', this);
+    testApiKey('test_anthropic', 'test-anthropic-result', document.getElementById('anthropic-key-input').value, this);
 });
 document.getElementById('test-gemini-btn').addEventListener('click', function () {
-    testApiKey('test_gemini', 'test-gemini-result', this);
+    testApiKey('test_gemini', 'test-gemini-result', document.getElementById('gemini-key-input').value, this);
 });
 document.getElementById('test-perplexity-btn').addEventListener('click', function () {
-    testApiKey('test_perplexity', 'test-perplexity-result', this);
+    testApiKey('test_perplexity', 'test-perplexity-result', document.getElementById('perplexity-key-input').value, this);
 });
 
 document.getElementById('api-test-btn').addEventListener('click', async function () {

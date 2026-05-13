@@ -59,9 +59,13 @@ if ( $action === 'save_api_keys' ) {
 
 // Test Anthropic connection
 if ( $action === 'test_api' || $action === 'test_anthropic' ) {
-    $stmt    = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
-    $stmt->execute( [ 'anthropic_api_key' ] );
-    $api_key = (string) $stmt->fetchColumn();
+    $api_key = trim( $input['api_key'] ?? '' );
+
+    if ( $api_key === '' ) {
+        $stmt = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
+        $stmt->execute( [ 'anthropic_api_key' ] );
+        $api_key = (string) $stmt->fetchColumn();
+    }
 
     // Fallback to .env
     if ( $api_key === '' ) {
@@ -76,7 +80,7 @@ if ( $action === 'test_api' || $action === 'test_anthropic' ) {
     }
 
     $payload = json_encode( [
-        'model'      => 'claude-sonnet-4-20250514',
+        'model'      => 'claude-haiku-4-5-20251001',
         'max_tokens' => 10,
         'messages'   => [ [ 'role' => 'user', 'content' => 'ping' ] ],
     ] );
@@ -110,9 +114,13 @@ if ( $action === 'test_api' || $action === 'test_anthropic' ) {
 
 // Test Gemini connection
 if ( $action === 'test_gemini' ) {
-    $stmt    = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
-    $stmt->execute( [ 'gemini_api_key' ] );
-    $api_key = (string) $stmt->fetchColumn();
+    $api_key = trim( $input['api_key'] ?? '' );
+
+    if ( $api_key === '' ) {
+        $stmt = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
+        $stmt->execute( [ 'gemini_api_key' ] );
+        $api_key = (string) $stmt->fetchColumn();
+    }
 
     if ( $api_key === '' ) {
         echo json_encode( [ 'success' => false, 'error' => 'No key set' ] );
@@ -150,9 +158,13 @@ if ( $action === 'test_gemini' ) {
 
 // Test Perplexity connection
 if ( $action === 'test_perplexity' ) {
-    $stmt    = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
-    $stmt->execute( [ 'perplexity_api_key' ] );
-    $api_key = (string) $stmt->fetchColumn();
+    $api_key = trim( $input['api_key'] ?? '' );
+
+    if ( $api_key === '' ) {
+        $stmt = $db->prepare( 'SELECT setting_value FROM settings WHERE setting_key = ?' );
+        $stmt->execute( [ 'perplexity_api_key' ] );
+        $api_key = (string) $stmt->fetchColumn();
+    }
 
     if ( $api_key === '' ) {
         echo json_encode( [ 'success' => false, 'error' => 'No key set' ] );
