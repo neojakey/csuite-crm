@@ -31,6 +31,28 @@ See [SETUP.md](SETUP.md) for the full walkthrough. Short version:
 5. Build CSS: `./tailwindcss -i assets/css/input.css -o assets/css/output.css --minify`
 6. Point a vhost at the project root and visit the URL
 
+## Usage
+
+**1. Set your company context**
+
+Open `config/company.php` and fill in your business details — name, product, market, stage, challenges, competitors, and so on. This context is injected automatically into every agent call. It's what makes the output relevant to your business rather than generic. Keep it updated as your situation changes.
+
+**2. Add contacts**
+
+Go to **Contacts → Add contact**. Set a status (Prospect, Warm, Active, Customer, Dormant, Lost) and a pipeline stage. Notes, tasks, and agent sessions all link back to a contact record.
+
+**3. Run an AI agent**
+
+Go to **Agents**, pick a role (CEO, CTO, CFO, CMO, CPO, COO), click a mode chip to set the task type (e.g. "Strategy decision", "LinkedIn post", "Revenue forecast"), paste your context or question into the textarea, and click **Run agent**. The response appears in the output panel. From there you can copy it to clipboard or save it directly as a task.
+
+**4. Manage tasks**
+
+Tasks created from agent output, or added manually, live in the **Tasks** module. Set priority (High/Medium/Low) and a due date. The dashboard surfaces your open tasks sorted by priority.
+
+**5. Track your sprint**
+
+The dashboard shows your sprint week progress bar, checkpoint date, and three signal criteria (Inbound, Product, Energy) that you toggle on as you hit them. Update the sprint week and checkpoint date in **Settings**.
+
 ## Language support
 
 English and Spanish are included. Adding a new language takes one file and two lines of config. See [lang/README.md](lang/README.md).
