@@ -21,3 +21,6 @@ Thumbs.db
 # Tailwind standalone binary (large, OS-specific)
 tailwindcss
 tailwindcss.exe
+
+# Claude Code project settings
+.claude/
