@@ -4,54 +4,76 @@ An open-source, self-hosted CRM and AI agent command centre for businesses of an
 
 ## What it does
 
-- **Six C-suite AI agents** (CEO, CTO, CFO, CMO, CPO, COO) — paste a context prompt, get expert-level strategic, technical, financial, marketing, product, or operational output
-- **CRM** — manage contacts through a full pipeline with notes, tasks, and agent session history linked to each record
-- **Sprint tracker** — dashboard with sprint week progress, checkpoint date, and three configurable signal criteria
-- **Fully yours** — all data lives in your MySQL database on your own server; the only outbound call is the Anthropic API request you explicitly make
+- **CRM assistant** — a floating chat widget on every page. Tell it what to do in plain English: *"Add Acme Ltd as a warm prospect from LinkedIn and create a follow-up task for Friday"*. It calls Claude, which reads and writes your live database using tool use.
+- **Pipeline board** — drag-and-drop Kanban board (Lead → Qualified → Proposal → Negotiation → Won → Lost) with live saves and an Unassigned column for contacts not yet staged
+- **Six C-suite AI agents** (CEO, CTO, CFO, CMO, CPO, COO) — role-specific modes for strategy, revenue, code review, LinkedIn posts, roadmap prioritisation, and more
+- **Boardroom Debate mode** — when multiple API keys are configured, all providers respond to your prompt in parallel and Claude synthesises the best combined answer
+- **Multi-provider AI** — Anthropic Claude, Google Gemini, and Perplexity all supported; keys managed in Settings and tested without leaving the page
+- **CRM** — contacts with status and pipeline stage, notes, tasks, and agent session history all linked to each record
+- **Sprint tracker** — dashboard with sprint week progress bar, checkpoint date, and three configurable signal criteria
+- **Fully yours** — all data lives in your MySQL database on your own server; no telemetry, no third-party scripts
 
 ## Why self-hosted
 
-Your data stays on your server. No SaaS vendor holds your business context, your pipeline, or your agent conversations. GDPR compliance is architectural — no telemetry, no third-party scripts, hard delete for erasure requests.
+Your data stays on your server. No SaaS vendor holds your business context, your pipeline, or your AI conversations. GDPR compliance is architectural — hard delete for erasure requests, no outbound calls except the AI API requests you explicitly make.
 
 ## Requirements
 
 - PHP 8.x (shared hosting, VPS, Laragon, XAMPP, MAMP)
 - MySQL 8.x
-- Anthropic API key — [console.anthropic.com](https://console.anthropic.com)
-- Tailwind CSS standalone binary (for CSS compilation — pre-built `output.css` included on first install)
+- At least one AI API key:
+  - Anthropic — [console.anthropic.com](https://console.anthropic.com) *(required for the CRM assistant and Boardroom synthesis)*
+  - Google Gemini — [aistudio.google.com](https://aistudio.google.com/app/apikey) *(optional)*
+  - Perplexity — [perplexity.ai/settings/api](https://www.perplexity.ai/settings/api) *(optional)*
+- Tailwind CSS standalone binary (for CSS compilation — pre-built `output.css` included)
 
 ## Quick start
 
 See [SETUP.md](SETUP.md) for the full walkthrough. Short version:
 
 1. Create MySQL database `csuite_crm` and run `sql/schema.sql`
-2. Copy `.env.example` → `.env`, add your API key and DB credentials
+2. Copy `.env.example` → `.env`, add your DB credentials (and optionally your Anthropic key)
 3. Copy `config/company.example.php` → `config/company.php`, fill in your business details
 4. Copy `config/auth.example.php` → `config/auth.php`, generate a bcrypt hash and paste it in
 5. Build CSS: `./tailwindcss -i assets/css/input.css -o assets/css/output.css --minify`
 6. Point a vhost at the project root and visit the URL
+7. Add your API keys in **Settings → API Keys**
 
 ## Usage
 
 **1. Set your company context**
 
-Open `config/company.php` and fill in your business details — name, product, market, stage, challenges, competitors, and so on. This context is injected automatically into every agent call. It's what makes the output relevant to your business rather than generic. Keep it updated as your situation changes.
+Open `config/company.php` and fill in your business details — name, product, market, stage, challenges, competitors. This is injected automatically into every AI call, making output relevant to your business rather than generic. Keep it updated as your situation changes.
 
-**2. Add contacts**
+**2. Use the CRM assistant**
 
-Go to **Contacts → Add contact**. Set a status (Prospect, Warm, Active, Customer, Dormant, Lost) and a pipeline stage. Notes, tasks, and agent sessions all link back to a contact record.
+Click the orange chat button in the bottom-right corner of any page. Type in plain English:
 
-**3. Run an AI agent**
+- *"Show me all my warm prospects"*
+- *"Add Harbour Creative as an active customer, contact is Steve, steve@harbour.co"*
+- *"Move Acme to the negotiation stage and create a high-priority task to send a contract by Thursday"*
+- *"Run a CFO agent and ask it to review our pricing model"*
+- *"What does my pipeline look like?"*
 
-Go to **Agents**, pick a role (CEO, CTO, CFO, CMO, CPO, COO), click a mode chip to set the task type (e.g. "Strategy decision", "LinkedIn post", "Revenue forecast"), paste your context or question into the textarea, and click **Run agent**. The response appears in the output panel. From there you can copy it to clipboard or save it directly as a task.
+The assistant calls your live database directly — it doesn't just describe actions, it performs them.
 
-**4. Manage tasks**
+**3. Manage the pipeline**
 
-Tasks created from agent output, or added manually, live in the **Tasks** module. Set priority (High/Medium/Low) and a due date. The dashboard surfaces your open tasks sorted by priority.
+Go to **Pipeline** to see all contacts on a Kanban board. Drag cards between stages — changes save instantly. Contacts with free-text stages appear in the Unassigned column until moved to a canonical stage.
 
-**5. Track your sprint**
+**4. Run an AI agent**
 
-The dashboard shows your sprint week progress bar, checkpoint date, and three signal criteria (Inbound, Product, Energy) that you toggle on as you hit them. Update the sprint week and checkpoint date in **Settings**.
+Go to **Agents**, pick a role (CEO, CTO, CFO, CMO, CPO, COO), select a provider from the dropdown, choose a mode chip (e.g. "Strategy decision", "Revenue forecast"), paste your context, and click **Run agent**. Copy the output or save it as a task directly from the panel.
+
+If two or more providers are configured, a **Boardroom** tab appears — all providers respond in parallel, then Claude synthesises the best combined answer.
+
+**5. Manage contacts, notes, and tasks**
+
+Contacts have status, pipeline stage, linked notes, linked tasks, and a full agent session history. Tasks set from agent output carry the session link automatically. The dashboard surfaces open tasks sorted by priority and recent agent sessions.
+
+**6. Track your sprint**
+
+The dashboard shows your sprint week progress bar, checkpoint date, and three signal criteria (Inbound, Product, Energy) you toggle as you hit them. Update sprint settings in **Settings**.
 
 ## Language support
 
