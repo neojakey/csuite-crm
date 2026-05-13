@@ -2,8 +2,6 @@
 
 An open-source, self-hosted CRM and AI agent command centre for businesses of any size.
 
-![Dashboard](docs/screenshot.png)
-
 ## What it does
 
 - **Six C-suite AI agents** (CEO, CTO, CFO, CMO, CPO, COO) — paste a context prompt, get expert-level strategic, technical, financial, marketing, product, or operational output
